@@ -29,7 +29,7 @@ const Signup = (props) => {
                secureTextEntry={true}></TextInput>
         
         
-                <Button title='Signup'></Button>
+                <Button title='Signup' onPress={()=>{props.navigation.navigate('Login')}}></Button>
 
                 <View style={{display: 'flex', flexDirection: 'row', marginTop: 25, fontSize:14, alignSelf:"center"}}>
                     <Text >Already have an account ? </Text>

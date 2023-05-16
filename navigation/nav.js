@@ -1,5 +1,9 @@
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
+import Home from '../screens/Home';
+import Search from '../screens/Search';
+import Feedback from '../screens/Feedback';
+import User from '../screens/User';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -11,6 +15,10 @@ const MainNavigator = () => {
           <StackDemo.Navigator  initialRouteName='Login'>
             <StackDemo.Screen name='Login' component={Login} options={{headerShown: false}}/>
             <StackDemo.Screen name='Signup' component={Signup} options={{title: ""}}/>
+            <StackDemo.Screen name='Home' component={Home} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Search' component={Search} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Feedback' component={Feedback} options={{headerShown: false}}/>
+            <StackDemo.Screen name='User' component={User} options={{headerShown: false}}/>
         </StackDemo.Navigator>
       </NavigationContainer>
     );

@@ -48,7 +48,7 @@ const Login = (props) => {
     
             <Text style={{marginTop:10, textAlign: "right", color: "#1877F2", marginBottom: 23}} >Forgot the password ?</Text>
     
-            <Button title='Login'></Button>
+            <Button title='Login' onPress={()=>{props.navigation.navigate('Home')}}></Button>
             <View style={{height:20}}/>
 
             <View style={{display: 'flex', flexDirection: 'row', marginTop: 25, fontSize:14, alignSelf:"center"}}>
