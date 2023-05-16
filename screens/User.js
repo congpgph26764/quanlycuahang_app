@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useState} from "react";
-import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, TouchableHighlight, Alert, TouchableOpacity, TextInput } from 'react-native';
+import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, TouchableHighlight, Alert, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 
 const User = (props) => {
     return (
@@ -13,7 +13,74 @@ const User = (props) => {
 
 
                 <View style={styles.contentContainer}> 
+                    <ScrollView >
+                        <View style={{marginHorizontal: 40}}>
+                            <View style={{alignItems:"center", paddingTop: 20}}>
+                                <Image style={{width:120, height:120, borderRadius: 100}} source={{uri: "https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383"}}></Image>
+                                <Text style= {{fontSize: 25, marginTop:10}}>Phạm Gia Công</Text>
+                            </View>
 
+                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginTop:60, marginBottom:20,alignItems:"center"}}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3076/3076343.png"}}/>
+                                <View style={{marginLeft:40}}>
+                                    <Text style={{fontSize: 20}}>Personal Info</Text>
+                                    <Text style={{fontSize: 12}}>Email, Phone Number, Address</Text>
+                                </View>
+                                <Image style={{width:20, height:20, marginLeft:80}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+                            </TouchableOpacity>
+
+                            <View style={styles.separator1}/>
+
+                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical:20,alignItems:"center"}}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2438/2438078.png"}}/>
+                                <View style={{marginLeft:40}}>
+                                    <Text style={{fontSize: 20}}>Password</Text>
+                                    <Text style={{fontSize: 12}}>For safety change regularly</Text>
+                                </View>
+                                <Image style={{width:20, height:20, marginLeft:100}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+                            </TouchableOpacity>
+
+                            <View style={styles.separator1}/>
+
+                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical:20,alignItems:"center"}}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/4021/4021708.png"}}/>
+                                <View style={{marginLeft:40}}>
+                                    <Text style={{fontSize: 20}}>Payment</Text>
+                                    <Text style={{fontSize: 12}}>Credit Card information</Text>
+                                </View>
+                                <Image style={{width:20, height:20, marginLeft:119}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+                            </TouchableOpacity>
+
+                            <View style={styles.separator1}/>
+
+                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical: 20,alignItems:"center"}}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2961/2961948.png"}}/>
+                                <View style={{marginLeft:40}}>
+                                    <Text style={{fontSize: 20}}>Purchase List</Text>
+                                    <Text style={{fontSize: 12}}>Yours shoping history</Text>
+                                </View>
+                                <Image style={{width:20, height:20, marginLeft:124}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical: 20,alignItems:"center"}}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3095/3095583.png"}}/>
+                                <View style={{marginLeft:40}}>
+                                    <Text style={{fontSize: 20}}>Contact</Text>
+                                    <Text style={{fontSize: 12}}>Email, Phone Number, Facebook</Text>
+                                </View>
+                                <Image style={{width:20, height:20, marginLeft:71}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+                            </TouchableOpacity>
+
+                            <Text style={{marginTop: 20, color: "red", alignSelf: "center"}}>LOG OUT</Text>
+
+
+                            <View style={{height:30}}></View>
+
+                        </View>
+                        
+                        
+                    
+                    </ScrollView>
 
                 </View>
                     

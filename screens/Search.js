@@ -1,8 +1,52 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useState} from "react";
-import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, TouchableHighlight, Alert, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, TouchableHighlight, Alert, TouchableOpacity, TextInput, ScrollView,SafeAreaView, FlatList } from 'react-native';
+
+const CAT= [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      image: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383',
+      title: 'First Item',
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      image: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383',
+      title: 'Second Item',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      image: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383',
+      title: 'Third Item',
+    },
+    
+    
+  ];
+
+  const Item = ({item, onPress, backgroundColor, textColor}) => (
+    <TouchableOpacity onPress={onPress} style={styles.item}>
+        <Image style={{width:160, height:80}} source={{uri: item.image}}></Image>
+        <View style={styles.title}>
+            <Text numberOfLines={1} style={{fontSize:13}} >{item.title}</Text>
+        </View>
+        
+    </TouchableOpacity>
+  );
+
 
 const Search = (props) => {
+
+    const [selectedId, setSelectedId] = useState();
+
+    const renderItem = ({item}) => {
+
+        return (
+          <Item
+            item={item}
+            onPress={() => setSelectedId(item.id)}
+          />
+        );
+      };
+
     return (
         <View style={styles.container}>
             <View style={styles.herder}>
@@ -16,8 +60,25 @@ const Search = (props) => {
 
 
                 <View style={styles.contentContainer}> 
-                    <ScrollView>
-                        <TextInput placeholder="Search" style={{margin:20, padding:10, paddingLeft: 10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
+                    <ScrollView >
+                        <View style={{marginHorizontal: 20}}>
+                            <TextInput placeholder="Search" style={{ padding:10, paddingLeft: 10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
+                        
+                            <Text style={{marginTop:20, fontSize:20}}>Categories</Text>
+                            <SafeAreaView style={{marginTop:10, alignItems: "center",}}>
+                                <FlatList
+                                    numColumns={2}
+                                    data={CAT}
+                                    keyExtractor={item => item.id}
+                                    extraData={selectedId}
+                                    renderItem={renderItem}
+                                />        
+                            </SafeAreaView>
+
+                            <View style={{height:30}}></View>
+                        </View>
+                        
+                        
                     </ScrollView>
                     
                 </View>
@@ -47,6 +108,21 @@ const Search = (props) => {
 export default Search
 
 const styles = StyleSheet.create({
+
+    item: {
+        width: 160,
+        height: 120,
+        backgroundColor: "#ffff",
+        marginHorizontal: 12,
+        marginVertical: 12,
+        alignItems: "center",
+      },
+      title: {
+        marginHorizontal: 5,
+        marginVertical: 10,
+        alignItems: "center"
+      },
+
     container: {
         flex: 1,
         marginTop:20,

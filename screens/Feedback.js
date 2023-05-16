@@ -14,13 +14,13 @@ const Feedback = (props) => {
 
                     <View style={styles.contentContainer}> 
                         <View style={{display: 'flex', flexDirection: 'row', marginTop: 20, fontSize:14}}>
-                            <Text >Họ tên</Text>
+                            <Text >Full name</Text>
                             <Text style={{color:"red", marginLeft: 5}}>*</Text>
                         </View>
                         <TextInput style={{marginTop:10, padding:10, paddingLeft: 10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
 
                         <View style={{display: 'flex', flexDirection: 'row', marginTop: 20, fontSize:14}}>
-                            <Text >Số điện thoại</Text>
+                            <Text >Phone Number</Text>
                             <Text style={{color:"red", marginLeft: 5}}>*</Text>
                         </View>
                         <TextInput style={{marginTop:10, padding:10, paddingLeft: 10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
@@ -32,7 +32,7 @@ const Feedback = (props) => {
                         <TextInput style={{marginTop:10, padding:10, paddingLeft: 10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
 
                         <View style={{display: 'flex', flexDirection: 'row', marginTop: 20, fontSize:14}}>
-                            <Text >Bình luận</Text>
+                            <Text >Comment</Text>
                             <Text style={{color:"red", marginLeft: 5}}>*</Text>
                         </View>
                         <TextInput style={{marginTop:10, padding:10, paddingLeft: 10, height:48, marginBottom: 50, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
