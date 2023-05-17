@@ -22,20 +22,21 @@ const CAT= [
     
   ];
 
-  const Item = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity onPress={onPress} style={styles.item}>
-        <Image style={{width:160, height:80}} source={{uri: item.image}}></Image>
-        <View style={styles.title}>
-            <Text numberOfLines={1} style={{fontSize:13}} >{item.title}</Text>
-        </View>
-        
-    </TouchableOpacity>
-  );
 
 
 const Search = (props) => {
 
     const [selectedId, setSelectedId] = useState();
+
+    const Item = ({item, onPress, backgroundColor, textColor}) => (
+        <TouchableOpacity onPress={onPress} style={styles.item}>
+            <Image style={{width:160, height:80}} source={{uri: item.image}}></Image>
+            <View style={styles.title}>
+                <Text numberOfLines={1} style={{fontSize:13}} >{item.title}</Text>
+            </View>
+            
+        </TouchableOpacity>
+      );
 
     const renderItem = ({item}) => {
 
@@ -51,7 +52,7 @@ const Search = (props) => {
         <View style={styles.container}>
             <View style={styles.herder}>
                     <Text style={{fontSize:20, marginLeft: 175}}>Search</Text>
-                    <TouchableOpacity style={{marginLeft: 125}}>
+                    <TouchableOpacity style={{marginLeft: 125}}  onPress={()=>{props.navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
                     

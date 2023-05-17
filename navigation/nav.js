@@ -4,6 +4,8 @@ import Home from '../screens/Home';
 import Search from '../screens/Search';
 import Feedback from '../screens/Feedback';
 import User from '../screens/User';
+import Detail from '../screens/Detail';
+import Cart from '../screens/Cart';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -19,6 +21,8 @@ const MainNavigator = () => {
             <StackDemo.Screen name='Search' component={Search} options={{headerShown: false}}/>
             <StackDemo.Screen name='Feedback' component={Feedback} options={{headerShown: false}}/>
             <StackDemo.Screen name='User' component={User} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Detail' component={Detail} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Cart' component={Cart} options={{headerShown: false}}/>
         </StackDemo.Navigator>
       </NavigationContainer>
     );

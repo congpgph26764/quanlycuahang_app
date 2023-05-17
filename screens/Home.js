@@ -93,11 +93,28 @@ const DATA = [
       </View>
     </TouchableOpacity>
   );
+
+    // Default On Press Action
+    const handlePress = (item) => {
+      console.log("Pressed", item.id);
+    };
   
-  // Default On Press Action
-  const handlePress = (item) => {
-    console.log("Pressed", item.id);
-  };
+
+
+const Home = (
+    props,
+    {data = DATA,
+    height = defaults.height,
+    width = defaults.width,
+    delay = defaults.delay,
+    onPress = handlePress,
+    ItemElement = Itema,}
+    ) => {
+
+    const [selectedId, setSelectedId] = useState();
+  const [selectedIndex, setselectedIndex] = useState(0);
+  const scrollView = useRef();
+
 
   const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity onPress={onPress} style={styles.itemcat1}>
@@ -109,7 +126,7 @@ const DATA = [
   );
 
   const ItemNew = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity onPress={onPress} style={styles.itemnew1}>
+    <TouchableOpacity style={styles.itemnew1} onPress={()=>{props.navigation.navigate('Detail')}}>
         <Image style={{width:160, height:150}} source={{uri: item.image}}></Image>
         <View style={styles.titlenew}>
             <Text numberOfLines={2} >
@@ -130,7 +147,7 @@ const DATA = [
   );
 
   const ItemPo = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity onPress={onPress} style={styles.itempo1}>
+    <TouchableOpacity style={styles.itempo1} onPress={()=>{props.navigation.navigate('Detail')}}>
         <Image style={{width:120, height:150}} source={{uri: item.image}}></Image>
         <View style={styles.titlepo}>
             <Text numberOfLines={2} style={{fontSize:13}} >
@@ -143,20 +160,6 @@ const DATA = [
     </TouchableOpacity>
   );
 
-
-const Home = (
-    props,
-    {data = DATA,
-    height = defaults.height,
-    width = defaults.width,
-    delay = defaults.delay,
-    onPress = handlePress,
-    ItemElement = Itema,}
-    ) => {
-
-    const [selectedId, setSelectedId] = useState();
-  const [selectedIndex, setselectedIndex] = useState(0);
-  const scrollView = useRef();
 
 
   const renderItem = ({item}) => {
@@ -225,7 +228,7 @@ const Home = (
         <View style={styles.container}>
                 <View style={styles.herder}>
                     <Text style={{fontSize:30, marginLeft: 20}}>Logo</Text>
-                    <TouchableOpacity style={{marginLeft: 220}}>
+                    <TouchableOpacity style={{marginLeft: 220}}  onPress={()=>{props.navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>
