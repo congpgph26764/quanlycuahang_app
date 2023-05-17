@@ -97,7 +97,10 @@ const Cart = (props) => {
                         <Text>Total payment</Text>
                         <Text style={{fontSize: 17, color: "#FF6633"}}>1000000 đ</Text>
                     </View>
-                    <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Buy now</Text>
+                    <TouchableOpacity>
+                        <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Buy now</Text>
+                    </TouchableOpacity>
+                    
                 </View>     
 
             </View>

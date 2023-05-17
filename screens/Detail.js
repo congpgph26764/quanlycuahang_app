@@ -47,8 +47,13 @@ const Detail = (props) => {
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
                     <View style={{display: 'flex', flexDirection: 'row',}}>
-                        <Text style={{backgroundColor:"#00CC99", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Add to cart</Text>
-                        <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 100, color: "#fff"}}>Buy now</Text>
+                        <TouchableOpacity>
+                            <Text style={{backgroundColor:"#00CC99", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Add to cart</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 100, color: "#fff"}}>Buy now</Text>
+                        </TouchableOpacity>
+                        
                     </View>     
                     
                 </View>
