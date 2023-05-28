@@ -3,17 +3,41 @@ import React, {Component, useState,useRef, useEffect} from "react";
 import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, SafeAreaView, TouchableHighlight, Alert, TouchableOpacity, TextInput, Dimensions, ScrollView, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Linking} from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
-const Detail = (props) => {
+const Detail = ({route, navigation }) => {
+    const { id,name,description,id_category, price, image, image1, image2, quantity, status } = route.params;
+
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+    const images = [
+        { id: 1, url: image },
+        { id: 2, url: image1 },
+        { id: 3, url: image2 },
+      ];
+
+      const renderItem = ({ item, index }) => {
+        return (
+          <TouchableOpacity onPress={() => setSelectedImageIndex(index)}>
+            <Image
+              source={{ uri: item.url }}
+              style={{ width: 80, height: 80, borderRadius: 5, marginHorizontal: 5 }}
+            />
+          </TouchableOpacity>
+        );
+      };
+    
+    
+    
     return(
         <View style={styles.container}>
             <View style={styles.herder}>
 
-                    <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>
+                    <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{navigation.goBack()}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3114/3114883.png"}}/>
                     </TouchableOpacity>
                     
-                    <TouchableOpacity style={{marginLeft: 300}} onPress={()=>{props.navigation.navigate('Cart')}}>
+                    <TouchableOpacity style={{marginLeft: 300}} onPress={()=>{navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
                     
@@ -23,19 +47,34 @@ const Detail = (props) => {
 
                 <View style={styles.contentContainer}> 
                     <ScrollView >
-                        <Image style={{width: "100%", height:400, marginTop:10}} source={{uri: "https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383"}}></Image>
-                        <View style={{marginHorizontal: 20, marginVertical: 20}}>
-                            <Text style={{color: "#777777"}}>HOODIE</Text>
-                            <Text style={{fontSize:20, marginTop:10}}>SMILEY FACE HOODIE</Text>
-                            <Text style={{color: "#777777"}}>(100)</Text>
+                        
 
-                            <Text style={{ marginTop:10, marginBottom:10}}>5000000 đ</Text>
+                        <View>
+                            
+                            <Image
+                                source={{ uri: images[selectedImageIndex].url }}
+                                style={{ width: Dimensions.get('window').width, height: 400 }}
+                            />
+                            <Carousel
+                                data={images}
+                                renderItem={renderItem}
+                                sliderWidth={Dimensions.get('window').width}
+                                itemWidth={80}
+                                onSnapToItem={(index) => setSelectedImageIndex(index)}
+                            />
+                        </View>
+
+                        <View style={{marginHorizontal: 20, marginVertical: 20}}>
+                            <Text style={{fontSize:20, marginTop:10}}>{name.toUpperCase()}</Text>
+                            <Text style={{color: "#777777"}}>({quantity})</Text>
+
+                            <Text style={{ marginTop:10, marginBottom:10}}>{price} đ</Text>
 
                             <View style={styles.separator1}/>
 
                             <Text style={{ marginTop:10, marginBottom:10, fontSize:16}}>Product info</Text>
 
-                            <Text style={{color: "#777777"}}>Chất liệu : Vải nỉ bông 300 GSM. Màu sắc : Đen, Ghi đậm, Xanh lá. Form dáng : Form Hoodie Regular. Cảm hứng thiết kế : Mặt trước in logo ClownZ cùng dòng chữ Smiley Face Brand, mặt sau in text ClownZ được thiết kế theo style gothic, đi kèm dòng chữ Stand for northside ở bên dưới. Công nghệ in ấn / thiết kế : in kéo lụa hiệu ứng nổi vân đá. Chi tiết đặc biệt : hình in có hiệu ứng nổi vân đặc biệt</Text>
+                            <Text style={{color: "#777777"}}>{description}</Text>
                         </View>
                         
                     </ScrollView>

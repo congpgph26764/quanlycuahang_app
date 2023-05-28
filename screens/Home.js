@@ -116,7 +116,18 @@ const containsCat = ({id_category}, query) =>{
   );
 
   const ItemNew = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity style={styles.itemnew1} onPress={()=>{props.navigation.navigate('Detail')}}>
+    <TouchableOpacity style={styles.itemnew1} onPress={()=>{props.navigation.navigate('Detail', {
+      id: item._id,
+      name: item.name,
+      description: item.description,
+      id_category: item.id_category,
+      price: item.price,
+      image: item.image,
+      image1: item.image1,
+      image2: item.image2,
+      quantity: item.quantity,
+      status: item.status
+      })}}>
         <Image style={{width:160, height:150}} source={{uri: item.image}}></Image>
         <View style={styles.titlenew}>
             <Text numberOfLines={2} >
@@ -135,7 +146,18 @@ const containsCat = ({id_category}, query) =>{
   );
 
   const ItemPo = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity style={styles.itempo1} onPress={()=>{props.navigation.navigate('Detail')}}>
+    <TouchableOpacity style={styles.itempo1} onPress={()=>{props.navigation.navigate('Detail', {
+      id: item._id,
+      name: item.name,
+      description: item.description,
+      id_category: item.id_category,
+      price: item.price,
+      image: item.image,
+      image1: item.image1,
+      image2: item.image2,
+      quantity: item.quantity,
+      status: item.status
+      })}}>
         <Image style={{width:120, height:150}} source={{uri: item.image}}></Image>
         <View style={styles.titlepo}>
             <Text numberOfLines={2} style={{fontSize:13}} >

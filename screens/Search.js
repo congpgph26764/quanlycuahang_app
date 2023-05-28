@@ -54,7 +54,18 @@ const Search = (props) => {
       );
 
       const ItemPro = ({item, onPress, backgroundColor, textColor}) => (
-        <TouchableOpacity style={styles.itempro1} onPress={()=>{props.navigation.navigate('Detail')}} >
+        <TouchableOpacity style={styles.itempro1} onPress={()=>{props.navigation.navigate('Detail', {
+            id: item._id,
+            name: item.name,
+            description: item.description,
+            id_category: item.id_category,
+            price: item.price,
+            image: item.image,
+            image1: item.image1,
+            image2: item.image2,
+            quantity: item.quantity,
+            status: item.status
+            })}} >
             <Image style={{width:170, height:180}} source={{uri: item.image}}></Image>
             <View style={styles.titlepro}>
                 <Text numberOfLines={2} style={{fontSize:13}} >
@@ -70,7 +81,6 @@ const Search = (props) => {
         return (
           <ItemPro
             item={item}
-            onPress={() => setSelectedId(item._id)}
           />
         );
       };
