@@ -8,27 +8,27 @@ import filter from 'lodash.filter';
 const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "The most beutiful railway track!",
+      title: "",
       subtitle:
-        "This is a long subtitle. Which also can be used to display flashnews.",
+        "",
       image:
-        "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4",
+        "https://i.pinimg.com/564x/6d/40/5b/6d405ba70fb0c13cd0f200bea6caf4e3.jpg",
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Memories lives in this home",
+      title: "SS/23",
       subtitle:
-        "This is a long subtitle. Which also can be used to display flashnews.",
+        "Founnded in 2011, ABC aims to become the best Hip Hop inspired fashion brand in Vietnam. Each of our products is created by a youthful enthusiastic team.",
       image:
-        "https://i.picsum.photos/id/193/700/500.jpg?hmac=q5QJ9ieureq_dXwwsUmh7ub2pN-V1arRrqpMV7czc9g",
+        "https://bizweb.dktcdn.net/100/414/728/themes/867455/assets/slider_1.jpg?1684825446459",
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Snow and Fun! How can we forget",
+      title: "Fall 23",
       subtitle:
-        "This is a long subtitle. Which also can be used to display flashnews.",
+        "One of the great works prepared for this fall.",
       image:
-        "https://i.picsum.photos/id/971/700/500.jpg?hmac=kNTldtPvd24NEOfvd39iwsRBun4As0dYChiWQuyCFo4",
+        "https://balenciaga.dam.kering.com/m/22c22a53629a8f04/Large-HOME_0000_FA23_LOOK_57_EWAN.jpg",
     },
   ];
   
@@ -275,8 +275,9 @@ const containsCat = ({id_category}, query) =>{
     return (
         <View style={styles.container}>
                 <View style={styles.herder}>
-                    <Text style={{fontSize:30, marginLeft: 20}}>Logo</Text>
-                    <TouchableOpacity style={{marginLeft: 220}}  onPress={()=>{props.navigation.navigate('Cart')}}>
+                    <Text style={{fontSize:30, marginLeft: 20}}>PRADA</Text>
+                    
+                    <TouchableOpacity style={{marginLeft: 200}}  onPress={()=>{props.navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>

@@ -80,7 +80,7 @@ const Login = (props) => {
             <Modal visible={manhinhcho}>
                 <View style={st.modal_dialog_view}>
                 <Dem/>
-                <Text style={{fontSize:50, alignSelf:"center", marginTop:100}}>Hello!</Text>
+                <Text style={{fontSize:50, alignSelf:"center", marginTop: 200}}>PRADA</Text>
                 </View>
             </Modal>
             <Text style={{fontSize: 48, lineHeight: 72, marginTop: 70}}>Hello</Text>
@@ -125,6 +125,8 @@ const st = StyleSheet.create({
     modal_dialog_view:{
         flex:1,
         marginLeft:20,
-        marginRight:20
+        marginRight:20,
+        alignItems: "center",
+        alignSelf: "center"
     }
   }) 

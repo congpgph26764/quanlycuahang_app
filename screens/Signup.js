@@ -10,6 +10,20 @@ const Signup = (props) => {
     const [address, setaddress] = useState("");
     const [phone, setphone] = useState("");
 
+    const [acc, setAcc] = useState([]);
+
+    const getData = () =>{
+        let url_cat = 'http://192.168.100.9:3000/api/users';
+      
+         fetch(url_cat)
+               .then((res) => {
+                   return res.json();
+               })
+               .then( (data) =>{
+                setAcc(data);
+               })
+      }
+
     const doSignup = () =>{
 
 
@@ -39,6 +53,19 @@ const Signup = (props) => {
             return;
         }
 
+        let emailacc = 0;
+
+        acc.forEach(i => {
+            if (email == i.email) {
+                emailacc = 1;
+            }
+        });
+
+        if (emailacc==1) {
+            alert("Email đã được sử dụng")
+            return;
+        }
+
 
         let objU = { name: fullname, role: "User", email: email, phone: phone, password: password, address: address };
 
@@ -64,6 +91,10 @@ const Signup = (props) => {
                 console.log(ex);
             });
     }
+
+    React.useEffect (() =>{
+        getData();
+      }, [])
 
         return (
             <View style={styles.container}>
