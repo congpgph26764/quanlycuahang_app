@@ -1,49 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useState,useRef, useEffect} from "react";
-import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, SafeAreaView, TouchableHighlight, Alert, TouchableOpacity, TextInput, Dimensions, ScrollView, FlatList } from 'react-native';
+import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, SafeAreaView,ActivityIndicator, TouchableHighlight, Alert, TouchableOpacity, TextInput, Dimensions, ScrollView, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Linking} from 'react-native';
-
-
-const CATEGORY= [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      image: 'https://cdn-icons-png.flaticon.com/128/2529/2529521.png',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      image: 'https://cdn-icons-png.flaticon.com/128/2529/2529521.png',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      image: 'https://cdn-icons-png.flaticon.com/128/2529/2529521.png',
-      title: 'Third Item',
-    },
-    
-  ];
-
-  const PRO= [
-    {
-      id: '6426a323e027b4ed69c318db',
-      name: "SMILEY FACE HOODIE",
-      image: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383',
-      price: 500000,
-      quantity: 100,
-      description: "Chất liệu : Vải nỉ bông 300 GSM. Màu sắc : Đen, Ghi đậm, Xanh lá. Form dáng : Form Hoodie Regular. Cảm hứng thiết kế : Mặt trước in logo ClownZ cùng dòng chữ Smiley Face Brand, mặt sau in text ClownZ được thiết kế theo style gothic, đi kèm dòng chữ Stand for northside ở bên dưới. Công nghệ in ấn / thiết kế : in kéo lụa hiệu ứng nổi vân đá. Chi tiết đặc biệt : hình in có hiệu ứng nổi vân đặc biệt"
-    },
-    {
-      id: '6426bfa339e9e48b3ebb3ea1',
-      name: "CLOWNZ EMBOSSING T-SHIRT",
-      image: 'https://bizweb.dktcdn.net/100/414/728/products/1-8bf1535a-a88c-4bc8-b61e-3c35764f0314.jpg?v=1679297202317',
-      price: 400000,
-      quantity: 50,
-      description: "",
-    },
-    
-  ];
-
+import filter from 'lodash.filter';
 
 const DATA = [
     {
@@ -114,6 +74,36 @@ const Home = (
     const [selectedId, setSelectedId] = useState();
   const [selectedIndex, setselectedIndex] = useState(0);
   const scrollView = useRef();
+  const [pro, setpro] = useState([])
+  const [cat, setcat] = useState([])
+  const [fullData, setFullData] = useState([])
+  const [proNew, setProNew] = useState([])
+  const [fullDataNew, setFullDataNew] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+
+  const  handleSearchCat = (query) =>{
+    const formattedQuery = query.toLowerCase();
+    const filteredData = filter(fullData, (pro) =>{
+        return containsCat(pro, formattedQuery);
+    })
+    setpro(filteredData)
+
+    const filteredDataNew = filter(fullDataNew, (pro) =>{
+      return containsCat(pro, formattedQuery);
+  })
+    setProNew(filteredDataNew)
+}
+
+const containsCat = ({id_category}, query) =>{
+    if (id_category.includes(query) ) {    
+        return true;
+    }
+
+    if (query.includes("6472a7d21966a8c0795191e5") ) {    
+      return false;
+  }
+    return false;
+}
 
 
   const Item = ({item, onPress, backgroundColor, textColor}) => (
@@ -121,7 +111,7 @@ const Home = (
         <View style={[styles.itemcat, {backgroundColor}]}>
             <Image style={{width:25, height:25}} source={{uri: item.image}}></Image>
         </View>
-      <Text style={[styles.titlecat, {color: textColor}]}>{item.title}</Text>
+      <Text style={[styles.titlecat, {color: textColor}]}>{item.name}</Text>
     </TouchableOpacity>
   );
 
@@ -130,9 +120,7 @@ const Home = (
         <Image style={{width:160, height:150}} source={{uri: item.image}}></Image>
         <View style={styles.titlenew}>
             <Text numberOfLines={2} >
-                {item.name.length < 200
-                ? `${item.name}`
-                : `${item.name.substring(0, 200)}...`}</Text>
+                {item.name.toUpperCase()}</Text>
             <Text numberOfLines={3} style={{marginTop:5, fontSize: 11}}>
               {item.description.length < 200
                 ? `${item.description}`
@@ -151,9 +139,7 @@ const Home = (
         <Image style={{width:120, height:150}} source={{uri: item.image}}></Image>
         <View style={styles.titlepo}>
             <Text numberOfLines={2} style={{fontSize:13}} >
-                {item.name.length < 200
-                ? `${item.name}`
-                : `${item.name.substring(0, 200)}...`}</Text>
+                {item.name.toUpperCase()}</Text>
             <Text style={{fontSize:12, marginTop:5}}> {item.price} đ</Text>
         </View>
         
@@ -163,23 +149,33 @@ const Home = (
 
 
   const renderItem = ({item}) => {
-    const backgroundColor = item.id === selectedId ? '#FFFF33' : '#ffff';
+    const backgroundColor = item._id === selectedId ? '#FFFF33' : '#ffff';
 
     return (
       <Item
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => {
+          if (item.name=="All") {
+            setSelectedId(item._id)
+            handleSearchCat("")
+          }else{
+            setSelectedId(item._id),
+            handleSearchCat(item._id)
+          }
+          }}
         backgroundColor={backgroundColor}
       />
     );
   };
 
   const renderItemNew = ({item}) => {
+    if (pro.status == "new") {
+      
+    }
 
     return (
       <ItemNew
         item={item}
-        onPress={() => setSelectedId(item.id)}
       />
     );
   };
@@ -189,7 +185,7 @@ const Home = (
     return (
       <ItemPo
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => setSelectedId(item._id)}
       />
     );
   };
@@ -222,6 +218,58 @@ const Home = (
     // Divide the horizontal offset by the width of the view to see which page is visible
     setselectedIndex(Math.floor(contentOffset.x / viewSize.width));
   };
+
+
+  const getDataPro = () =>{
+    let url_pro = 'http://192.168.100.9:3000/api/products';
+  
+     fetch(url_pro)
+           .then((res) => {
+               return res.json();
+           })
+           .then( (data) =>{
+            setpro(data);
+            setFullData(data);
+
+            const products = [];
+
+            data.forEach(pro => {
+              if (pro.status.toLowerCase() == "new") {
+                products.push(pro)
+              }
+            });
+            setProNew(products)
+            setFullDataNew(products);
+            setIsLoading(false)
+           })
+  }
+
+  const getDataCat = () =>{
+    let url_cat = 'http://192.168.100.9:3000/api/categories';
+  
+     fetch(url_cat)
+           .then((res) => {
+               return res.json();
+           })
+           .then( (data) =>{
+            setcat(data);
+            setIsLoading(false)
+           })
+  }
+
+  React.useEffect (() =>{
+    setIsLoading(true);
+    getDataPro(),getDataCat()
+  }, [])
+
+  if (isLoading) {
+    return (
+        <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size={'large'} color="#5500dc"/>
+        </View>
+        
+    )
+  }
 
 
     return (
@@ -261,11 +309,13 @@ const Home = (
                         </ScrollView>
 
                         <View style={{marginHorizontal:10, marginTop: 10}}>
+
+                        <Text style={{marginTop:20,fontSize:20}}>Categories</Text>
                             <SafeAreaView>
                                 <FlatList
                                     horizontal
-                                    data={CATEGORY}
-                                    keyExtractor={item => item.id}
+                                    data={cat}
+                                    keyExtractor={item => item._id}
                                     extraData={selectedId}
                                     renderItem={renderItem}
                                 />        
@@ -275,19 +325,20 @@ const Home = (
                             <SafeAreaView style={{marginTop:10}}>
                                 <FlatList
                                     horizontal
-                                    data={PRO}
-                                    keyExtractor={item => item.id}
+                                    data={proNew}
+                                    keyExtractor={item => item._id}
                                     extraData={selectedId}
                                     renderItem={renderItemNew}
                                 />        
                             </SafeAreaView>
-                            <Text style={{marginTop:20, fontSize:20}}>Popular Items</Text>
+
+                            <Text style={{marginTop:20,fontSize:20}}>Products</Text>
 
                             <SafeAreaView style={{marginTop:10}}>
                                 <FlatList
                                     horizontal
-                                    data={PRO}
-                                    keyExtractor={item => item.id}
+                                    data={pro}
+                                    keyExtractor={item => item._id}
                                     extraData={selectedId}
                                     renderItem={renderItemPo}
                                 />        
@@ -303,7 +354,7 @@ const Home = (
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
                     <TouchableOpacity>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
+                        <Image style={{width:25, height:25}} onPress={()=>{props.navigation.navigate('Search')}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{props.navigation.navigate('Search')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3126/3126554.png"}}/>
