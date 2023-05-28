@@ -92,6 +92,8 @@ const Feedback = (props) => {
                     alert("Gửi Feedback thành công");
                     console.log(obj);
                     props.navigation.navigate('Home')
+                }else{
+                    alert("Gửi Feedback không thành công");
                 }
                     
             })

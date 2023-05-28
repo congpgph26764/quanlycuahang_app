@@ -84,6 +84,8 @@ const Signup = (props) => {
                 if (res.status = 201){
                     alert("Đăng ký thành công");
                     props.navigation.navigate('Login')
+                }else{
+                    alert("Đăng ký không thành công");
                 }
                     
             })
