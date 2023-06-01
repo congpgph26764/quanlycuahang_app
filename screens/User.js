@@ -1,8 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useState} from "react";
 import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, TouchableHighlight, Alert, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const User = (props) => {
+
+    const [objU, setobjU] = useState({});
+
+    const getInfo = async ()=>{
+        try {
+            const value = await AsyncStorage.getItem('login')
+            console.log("lấy dữ liệu " + value);
+            if(value !== null) {
+    
+                setobjU ( JSON.parse(value) );
+                
+            }
+          } catch(e) {
+            console.log(e);
+          }
+          
+      }
+
+
+      React.useEffect(() => {
+            getInfo();
+        }, []);
+
+
+
     return (
         <View style={styles.container}>
             <View style={styles.herder}>
@@ -17,16 +44,16 @@ const User = (props) => {
                         <View style={{marginHorizontal: 40}}>
                             <View style={{alignItems:"center", paddingTop: 20}}>
                                 <Image style={{width:120, height:120, borderRadius: 100}} source={{uri: "https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383"}}></Image>
-                                <Text style= {{fontSize: 25, marginTop:10}}>Phạm Gia Công</Text>
+                                <Text style= {{fontSize: 25, marginTop:10}}>{objU.name}</Text>
                             </View>
 
-                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginTop:60, marginBottom:20,alignItems:"center"}}>
+                            <TouchableOpacity onPress={()=>{props.navigation.navigate('Info')}} style={{display: 'flex', flexDirection: 'row', marginTop:60, marginBottom:20,alignItems:"center"}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3076/3076343.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Personal Info</Text>
-                                    <Text style={{fontSize: 12}}>Email, Phone Number, Address</Text>
+                                    <Text style={{fontSize: 12}}>Fullname, Phone Number, Address</Text>
                                 </View>
-                                <Image style={{width:20, height:20, marginLeft:80}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+                                <Image style={{width:20, height:20, marginLeft:60}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
                             </TouchableOpacity>
 
                             <View style={styles.separator1}/>
@@ -62,6 +89,8 @@ const User = (props) => {
                                 <Image style={{width:20, height:20, marginLeft:124}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
                             </TouchableOpacity>
 
+                            <View style={styles.separator1}/>
+
                             <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical: 20,alignItems:"center"}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3095/3095583.png"}}/>
                                 <View style={{marginLeft:40}}>
@@ -71,7 +100,11 @@ const User = (props) => {
                                 <Image style={{width:20, height:20, marginLeft:71}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
                             </TouchableOpacity>
 
-                            <Text style={{marginTop: 20, color: "red", alignSelf: "center"}}>LOG OUT</Text>
+                            <TouchableOpacity style={{marginTop: 20,}} onPress={()=>{props.navigation.navigate('Login')}}>
+                                <Text style={{ color: "red", alignSelf: "center"}}>LOG OUT</Text>
+                            </TouchableOpacity>
+
+                            
 
 
                             <View style={{height:30}}></View>

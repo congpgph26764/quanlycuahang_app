@@ -6,6 +6,7 @@ import Feedback from '../screens/Feedback';
 import User from '../screens/User';
 import Detail from '../screens/Detail';
 import Cart from '../screens/Cart';
+import Info from '../screens/Info';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -23,6 +24,7 @@ const MainNavigator = () => {
             <StackDemo.Screen name='User' component={User} options={{headerShown: false}}/>
             <StackDemo.Screen name='Detail' component={Detail} options={{headerShown: false}}/>
             <StackDemo.Screen name='Cart' component={Cart} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Info' component={Info} options={{headerShown: false}}/>
         </StackDemo.Navigator>
       </NavigationContainer>
     );
