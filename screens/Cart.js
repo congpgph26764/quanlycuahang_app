@@ -4,60 +4,129 @@ import { RefreshControl, Modal, Button, StyleSheet, Text, View, Image, Share, Sa
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Linking} from 'react-native';
 
-const CART= [
-    {
-        id: '6426a323e027b4ed69c318db',
-        name: "SMILEY FACE HOODIE",
-        image: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383',
-        price: 500000,
-        quantity: 100,
-        description: "Chất liệu : Vải nỉ bông 300 GSM. Màu sắc : Đen, Ghi đậm, Xanh lá. Form dáng : Form Hoodie Regular. Cảm hứng thiết kế : Mặt trước in logo ClownZ cùng dòng chữ Smiley Face Brand, mặt sau in text ClownZ được thiết kế theo style gothic, đi kèm dòng chữ Stand for northside ở bên dưới. Công nghệ in ấn / thiết kế : in kéo lụa hiệu ứng nổi vân đá. Chi tiết đặc biệt : hình in có hiệu ứng nổi vân đặc biệt"
-      },
-      {
-        id: '6426bfa339e9e48b3ebb3ea1',
-        name: "CLOWNZ EMBOSSING T-SHIRT",
-        image: 'https://bizweb.dktcdn.net/100/414/728/products/1-8bf1535a-a88c-4bc8-b61e-3c35764f0314.jpg?v=1679297202317',
-        price: 400000,
-        quantity: 50,
-        description: "",
-      },
-    
-    
-  ];
-
 const Cart = (props) => {
+    const [refreshing, setRefreshing] = React.useState(false);
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            getCartData();
+        setRefreshing(false);
+        }, 2000);
+    }, []);
 
-    const [selectedId, setSelectedId] = useState();
 
-    const Item = ({item, onPress, backgroundColor, textColor}) => (
-        <TouchableOpacity onPress={onPress} style={{display: 'flex', flexDirection: 'row', marginVertical: 10, alignItems: "center"}}>
-            <Image style={{width:130, height:120}} source={{uri: item.image}}></Image>
-            <View style={{marginVertical:10, marginHorizontal: 20, width: 180, height:100}}>
-                <Text numberOfLines={2} style={{fontSize:13}} >{item.name}</Text>
-                <Text numberOfLines={1} style={{fontSize:13, color: "#FF6633", marginVertical:5}} >{item.price} đ</Text>
-                <View style={{display: 'flex', flexDirection: 'row', alignItems: "center"}}> 
-                    <Button title='+'></Button>
-                    <Text style={{marginHorizontal:10}}> 123 </Text>
-                    <Button title='-'></Button>
-                </View>
-            </View>
+    const [cartData, setCartData] = useState([]);
+    const sortedCartItems = cartData.sort((a, b) => b.timestamp - a.timestamp);
 
-            <TouchableOpacity>
-                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/4441/4441955.png"}}/>
-            </TouchableOpacity>
-            
-        </TouchableOpacity>
 
+  const getCartData = async () => {
+    if (cartData.length > 0) {
+        return;
+      }
+    try {
+      const jsonCartData = await AsyncStorage.getItem('cartData');
+      if (jsonCartData !== null) {
+        const cartData = JSON.parse(jsonCartData);
+        setCartData(cartData);
+        console.log('Dữ liệu giỏ hàng:', cartData);
+      }
+    } catch (error) {
+      console.log('Lỗi khi lấy dữ liệu giỏ hàng:', error);
+    }
+  };
+
+  useEffect(() => {
+    getCartData();
+  }, []);
+
+  const saveCartData = async(cartData) =>{
+    try {
+        const jsonCartData = JSON.stringify(cartData);
+        await AsyncStorage.setItem('cartData', jsonCartData);
+        console.log('Dữ liệu giỏ hàng đã được lưu trữ thành công');
+        console.log(jsonCartData);
+      } catch (error) {
+        console.log('Lỗi khi lưu trữ dữ liệu giỏ hàng:', error);
+      }
+  }
+
+  const removeFromCart = (index) => {
+    Alert.alert(
+        'Xác nhận',
+        'Bạn có chắc chắn muốn xóa khỏi giỏ hàng?',
+        [
+          { text: 'Hủy', style: 'cancel' },
+          {
+            text: 'Đồng ý',
+            onPress: () => {
+                const updatedCartData = [...cartData];
+                updatedCartData.splice(index, 1);
+                saveCartData(updatedCartData);
+                setCartData(updatedCartData);
+            },
+          },
+        ],
+        { cancelable: false }
       );
+    
+  };
 
-    const renderItem = ({item}) => {
+  const increaseQuantity = (index) => {
+    const updatedCartItems = [...cartData];
+    if (updatedCartItems[index].quantityItem < updatedCartItems[index].quantity) {
+        updatedCartItems[index].quantityItem += 1;
+        setCartData(updatedCartItems);
+    }
+    
+  };
 
-        return (
-          <Item
-            item={item}
-            onPress={() => setSelectedId(item.id)}
-          />
-        );
+  const decreaseQuantity = (index) => {
+    const updatedCartItems = [...cartData];
+    if (updatedCartItems[index].quantityItem > 1) {
+        updatedCartItems[index].quantityItem -= 1;
+        setCartData(updatedCartItems);
+    }
+    
+  };
+
+  const subTotalPrice = () => {
+    let totalPrice = 0;
+  
+    for (const item of cartData) {
+      totalPrice += item.price * item.quantityItem;
+    }
+  
+    return totalPrice;
+  };
+
+  const subTotal = subTotalPrice();
+
+  const shippingPrice = () => {
+    let totalPrice = 0;
+  
+    if (subTotal<1000000) {
+        totalPrice = 50000;
+    }
+  
+    return totalPrice;
+  };
+
+  const shipping = shippingPrice();
+
+
+  const calculateTotalPrice = () => {
+    
+    let totalPrice =  parseFloat(subTotal) + parseFloat(shipping);
+  
+    return totalPrice;
+  };
+
+  const total = calculateTotalPrice();
+
+    const renderCartItems = () => {
+        
+        
+          
       };
 
     return(
@@ -78,12 +147,38 @@ const Cart = (props) => {
             <View style={styles.contentContainer}> 
                 
                 <SafeAreaView style={{marginTop:10, marginHorizontal: 20}}>
-                    <FlatList
-                        data={CART}
-                        keyExtractor={item => item.id}
-                        extraData={selectedId}
-                        renderItem={renderItem}
-                    />        
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+                >
+                    {sortedCartItems.map((item, index) => {
+                    return(
+                        <View key={index}>
+                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical: 10, alignItems: "center"}}>
+                            <Image style={{width:130, height:120}} source={{uri: item.image}}></Image>
+                            <View style={{marginVertical:10, marginHorizontal: 20, width: 180, height:100}}>
+                                <Text numberOfLines={2} style={{fontSize:13}} >{item.name.toUpperCase()}</Text>
+                                <Text numberOfLines={1} style={{fontSize:13, color: "#FF6633", marginVertical:5}} >{item.price} đ</Text>
+                                <View style={{display: 'flex', flexDirection: 'row', alignItems: "center"}}> 
+                                    <Button onPress={() => increaseQuantity(index)} title='+'></Button>
+                                    <Text style={{marginHorizontal:10}}> {item.quantityItem} </Text>
+                                    <Button onPress={() => decreaseQuantity(index)} title='-'></Button>
+                                </View>
+                            </View>
+
+                            <TouchableOpacity onPress={() => removeFromCart(index)}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/4441/4441955.png"}}/>
+                            </TouchableOpacity>
+                            
+                        </TouchableOpacity>
+                        </View>
+                    )
+
+                        })
+                    }
+        
+                    </ScrollView>  
+
                 </SafeAreaView>
 
             </View>
@@ -94,8 +189,9 @@ const Cart = (props) => {
             <View style={styles.footer}>
                 <View style={{display: 'flex', flexDirection: 'row',}}>
                     <View style={{width: 250, marginLeft:10}}>
-                        <Text>Total payment</Text>
-                        <Text style={{fontSize: 17, color: "#FF6633"}}>1000000 đ</Text>
+                        <Text>Subtotal: {subTotal} đ</Text>
+                        <Text>Shipping: {shipping} đ</Text>
+                        <Text style={{color: "red", fontSize: 15}}>Total: {total} đ</Text>
                     </View>
                     <TouchableOpacity>
                         <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Buy now</Text>

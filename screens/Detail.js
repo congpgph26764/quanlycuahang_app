@@ -16,6 +16,29 @@ const Detail = ({route, navigation }) => {
         { id: 3, url: image2 },
       ];
 
+
+    const [cartData, setCartData] = useState([]);
+
+    useEffect(() => {
+        getCartData();
+      }, []);
+
+
+      const getCartData = async () => {
+        try {
+          const jsonCartData = await AsyncStorage.getItem('cartData');
+          if (jsonCartData !== null) {
+            const cartData = JSON.parse(jsonCartData);
+            setCartData(cartData);
+            console.log('Dữ liệu giỏ hàng:', cartData);
+          }
+        } catch (error) {
+          console.log('Lỗi khi lấy dữ liệu giỏ hàng:', error);
+        }
+      };
+
+   
+
       const renderItem = ({ item, index }) => {
         return (
           <TouchableOpacity onPress={() => setSelectedImageIndex(index)}>
@@ -26,8 +49,25 @@ const Detail = ({route, navigation }) => {
           </TouchableOpacity>
         );
       };
-    
-    
+
+
+      const saveCartData = async(cartData) =>{
+        try {
+            const jsonCartData = JSON.stringify(cartData);
+            await AsyncStorage.setItem('cartData', jsonCartData);
+            console.log('Dữ liệu giỏ hàng đã được lưu trữ thành công');
+            console.log(jsonCartData);
+          } catch (error) {
+            console.log('Lỗi khi lưu trữ dữ liệu giỏ hàng:', error);
+          }
+      }
+
+      const addToCart = (product) => {
+        const newProduct = { ...product, timestamp: Date.now() };
+        saveCartData([newProduct,...cartData,]);
+        alert("Thêm vào giỏ hàng thành công");
+        navigation.navigate("Cart")
+      };
     
     return(
         <View style={styles.container}>
@@ -66,7 +106,6 @@ const Detail = ({route, navigation }) => {
 
                         <View style={{marginHorizontal: 20, marginVertical: 20}}>
                             <Text style={{fontSize:20, marginTop:10}}>{name.toUpperCase()}</Text>
-                            <Text style={{color: "#777777"}}>({quantity})</Text>
 
                             <Text style={{ marginTop:10, marginBottom:10}}>{price} đ</Text>
 
@@ -86,11 +125,11 @@ const Detail = ({route, navigation }) => {
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
                     <View style={{display: 'flex', flexDirection: 'row',}}>
-                        <TouchableOpacity>
-                            <Text style={{backgroundColor:"#00CC99", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Add to cart</Text>
+                        <TouchableOpacity style={{marginRight:15}}>
+                            <Text style={{paddingVertical: 20, paddingHorizontal: 30, borderColor:"#000", borderWidth: 1}}>Size: Oversize</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 100, color: "#fff"}}>Buy now</Text>
+                        <TouchableOpacity onPress={() => addToCart({ id,name,description,id_category, price, image, image1, image2, quantity, status, quantityItem: 1 })}>
+                            <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 70, color: "#fff"}}>Add to cart</Text>
                         </TouchableOpacity>
                         
                     </View>     
