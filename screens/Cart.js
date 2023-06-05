@@ -134,11 +134,11 @@ const Cart = (props) => {
 
             <View style={styles.herder}>
 
-            <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>
+            <TouchableOpacity style={{marginRight: "auto"}} onPress={()=>{props.navigation.navigate('Home')}}>
                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3114/3114883.png"}}/>
             </TouchableOpacity>
 
-            <Text style={{fontSize:20, marginLeft: 130}}>Cart</Text>
+            <Text style={{fontSize:20, marginRight: "auto"}}>Cart</Text>
 
             </View>
             <View style={styles.separator1}/>
@@ -147,16 +147,16 @@ const Cart = (props) => {
             <View style={styles.contentContainer}> 
                 
                 <SafeAreaView style={{marginTop:10, marginHorizontal: 20}}>
-                <ScrollView
+                <ScrollView style ={{height: "100%"}}
                     refreshControl={
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
                 >
                     {sortedCartItems.map((item, index) => {
                     return(
                         <View key={index}>
-                            <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical: 10, alignItems: "center"}}>
+                          <TouchableOpacity style={{display: 'flex', flexDirection: 'row', marginVertical: 10, alignItems: "center", height: 120}}>
                             <Image style={{width:130, height:120}} source={{uri: item.image}}></Image>
-                            <View style={{marginVertical:10, marginHorizontal: 20, width: 180, height:100}}>
+                            <View style={{marginVertical:10, marginHorizontal: 20, width:150}}>
                                 <Text numberOfLines={2} style={{fontSize:13}} >{item.name.toUpperCase()}</Text>
                                 <Text numberOfLines={1} style={{fontSize:13, color: "#FF6633", marginVertical:5}} >{item.price} đ</Text>
                                 <View style={{display: 'flex', flexDirection: 'row', alignItems: "center"}}> 
@@ -166,7 +166,7 @@ const Cart = (props) => {
                                 </View>
                             </View>
 
-                            <TouchableOpacity onPress={() => removeFromCart(index)}>
+                            <TouchableOpacity style={{marginLeft: "auto"}} onPress={() => removeFromCart(index)}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/4441/4441955.png"}}/>
                             </TouchableOpacity>
                             
@@ -187,17 +187,14 @@ const Cart = (props) => {
 
             <View style={styles.separator1}/>
             <View style={styles.footer}>
-                <View style={{display: 'flex', flexDirection: 'row',}}>
-                    <View style={{width: 250, marginLeft:10}}>
-                        <Text>Subtotal: {subTotal} đ</Text>
-                        <Text>Shipping: {shipping} đ</Text>
-                        <Text style={{color: "red", fontSize: 15}}>Total: {total} đ</Text>
-                    </View>
-                    <TouchableOpacity>
-                        <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Buy now</Text>
-                    </TouchableOpacity>
-                    
-                </View>     
+                <View style={{width: 250}}>
+                    <Text>Subtotal: {subTotal} đ</Text>
+                    <Text>Shipping: {shipping} đ</Text>
+                    <Text style={{ fontSize: 17, marginTop:8}}>Total: {total} đ</Text>
+                </View>
+                <TouchableOpacity style={{marginLeft: "auto"}}>
+                    <Text style={{backgroundColor:"#FF6633", paddingVertical: 20, paddingHorizontal: 30, color: "#fff"}}>Buy now</Text>
+                </TouchableOpacity>
 
             </View>
 
@@ -214,10 +211,12 @@ const styles = StyleSheet.create({
         marginTop:20,
     },
     herder: {
-        height: 70,
-        display: 'flex', 
-        flexDirection: 'row',
-        alignItems: "center"
+      height: 70,
+      flexDirection: 'row',
+      alignItems: "center",
+      justifyContent: 'space-between',
+      paddingHorizontal: 20
+
     },
     separator1: {
         height: 1,
@@ -246,10 +245,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     footer: {
-        padding: 15,
-        
-        flexDirection: 'row',
-        display: 'flex', 
-        alignItems: "center"
+      height: 100,
+      flexDirection: 'row',
+      alignItems: "center",
+      justifyContent: 'space-between',
+      paddingHorizontal: 20
     }
 });

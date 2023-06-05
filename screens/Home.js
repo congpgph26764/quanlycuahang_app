@@ -297,12 +297,12 @@ const containsCat = ({id_category}, query) =>{
     return (
         <View style={styles.container}>
                 <View style={styles.herder}>
-                    <Text style={{fontSize:30, marginLeft: 20}}>PRADA</Text>
+                    <Text style={{fontSize:30, marginRight: 'auto'}}>PRADA</Text>
                     
-                    <TouchableOpacity style={{marginLeft: 200}}  onPress={()=>{props.navigation.navigate('Cart')}}>
+                    <TouchableOpacity style={{ marginLeft: "auto"}}  onPress={()=>{props.navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>
+                    <TouchableOpacity style={{ marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2529/2529521.png"}}/>
                     </TouchableOpacity>
                     
@@ -331,7 +331,7 @@ const containsCat = ({id_category}, query) =>{
                             </View>
                         </ScrollView>
 
-                        <View style={{marginHorizontal:10, marginTop: 10}}>
+                        <View style={{marginHorizontal:20, marginTop: 10}}>
 
                         <Text style={{marginTop:20,fontSize:20}}>Categories</Text>
                             <SafeAreaView>
@@ -484,7 +484,9 @@ const styles = StyleSheet.create({
         height: 70,
         display: 'flex', 
         flexDirection: 'row',
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: 'space-between',
+        paddingHorizontal: 20
     },
     separator1: {
         height: 1,

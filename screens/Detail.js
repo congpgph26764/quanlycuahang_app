@@ -73,11 +73,11 @@ const Detail = ({route, navigation }) => {
         <View style={styles.container}>
             <View style={styles.herder}>
 
-                    <TouchableOpacity style={{marginLeft: 30}} onPress={()=>{navigation.goBack()}}>
+                    <TouchableOpacity style={{ marginRight: "auto"}} onPress={()=>{navigation.goBack()}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3114/3114883.png"}}/>
                     </TouchableOpacity>
                     
-                    <TouchableOpacity style={{marginLeft: 300}} onPress={()=>{navigation.navigate('Cart')}}>
+                    <TouchableOpacity style={{marginLeft: "auto"}} onPress={()=>{navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
                     
@@ -149,9 +149,10 @@ const styles = StyleSheet.create({
     },
     herder: {
         height: 70,
-        display: 'flex', 
         flexDirection: 'row',
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: 'space-between',
+        paddingHorizontal: 20
     },
     separator1: {
         height: 1,

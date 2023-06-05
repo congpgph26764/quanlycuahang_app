@@ -79,9 +79,9 @@ const User = ({navigation}) => {
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3114/3114883.png"}}/>
                     </TouchableOpacity>
 
-                    <Text style={{fontSize:20, marginLeft:140}}>Info</Text>
+                    <Text style={{fontSize:20, marginLeft:"auto"}}>Info</Text>
                     
-                    <TouchableOpacity style={{marginLeft: 140}} onPress={HienModalUpdate}>
+                    <TouchableOpacity style={{marginLeft: "auto"}} onPress={HienModalUpdate}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/1827/1827933.png"}}/>
                     </TouchableOpacity>
                 </View>
@@ -112,7 +112,7 @@ const User = ({navigation}) => {
                                 <View style={st.modal_dialog_view}>
 
                                     <View style={{alignItems:"center", paddingTop: 20}}>
-                                        <Text style= {{fontSize: 25, marginTop:10}}>Update</Text>
+                                        <Text style= {{fontSize: 20, marginTop:40}}>Update Info</Text>
                                     </View>
 
                                     <View style={{display: 'flex', flexDirection: 'row', marginTop: 40, fontSize:14}}>
@@ -176,10 +176,10 @@ const styles = StyleSheet.create({
     },
     herder: {
         height: 70,
-        display: 'flex', 
         flexDirection: 'row',
         alignItems: "center",
-        alignSelf: "center"
+        justifyContent: 'space-between',
+        paddingHorizontal: 20
     },
     separator1: {
         height: 1,
