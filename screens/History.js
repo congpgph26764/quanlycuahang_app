@@ -156,6 +156,7 @@ const History = ({route, navigation }) => {
 
                 const bills = [];
                 console.log(data);
+                console.log(idU);
 
                 data.forEach(i => {
                     if( (i.id_user == idU) &&

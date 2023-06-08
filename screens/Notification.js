@@ -44,16 +44,9 @@ const Notification = ({navigation}) => {
                     <ScrollView >
 
                         <View style={{marginHorizontal: 20}}>
-                            <TouchableOpacity style={{ flexDirection: 'row', marginTop:40, marginBottom: 70,alignItems:"center", justifyContent: 'space-between',}}>
-                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/4922/4922073.png"}}/>
-                                <View style={{marginLeft:40}}>
-                                    <Text style={{fontSize: 20}}>Blog</Text>
-                                </View>
-                                <Image style={{width:20, height:20, marginLeft: "auto"}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
-                            </TouchableOpacity>
 
 
-                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{navigation.navigate('OrderStatus',{status: 'Chờ xác nhận', idU: objU._id})}}>
+                            <TouchableOpacity style={{ flexDirection: 'row', marginTop:40 }} onPress={()=>{navigation.navigate('OrderStatus',{status: 'Chờ xác nhận', idU: objU._id})}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2169/2169864.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Chờ xác nhận</Text>
