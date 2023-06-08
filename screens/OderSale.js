@@ -4,9 +4,9 @@ import { RefreshControl, FlatList, Modal, Button, SafeAreaView, StyleSheet, Text
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import filter from 'lodash.filter';
 
-const OderStatus = ({route, navigation }) => {
+const OderSale = ({route, navigation }) => {
 
-    const {status, idU} = route.params;
+    const {status} = route.params;
     const [bill, setbill] = useState([]);
     const [detailed_bill, setdetailed_bill] = useState([]);
 
@@ -44,6 +44,43 @@ const OderStatus = ({route, navigation }) => {
 
             toggleModal();
         };
+
+        const UpdateBill = () =>{
+            let statusNew = item.status;
+    
+            if (statusNew == "Chờ xác nhận") {
+                statusNew = "Chờ lấy hàng"
+            } else if (statusNew == "Chờ lấy hàng") {
+                statusNew = "Đang giao"
+            } else if (statusNew == "Đang giao") {
+                statusNew = "Đã hoàn thành"
+            }
+    
+            let obj = { _id: item._id, idBill: item.idBill, name: item.name, email: item.email, phone: item.phone, address: item.address,
+                date: item.date, total_price: item.total_price, payment_methods: item.payment_methods, note: item.note, id_user: item.id_user, status: statusNew};
+        
+                let url_bill ="http://192.168.100.9:3000/api/bill/update/"+ item._id;
+        
+                fetch(url_bill, {
+                method: "PUT",
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                
+                body: JSON.stringify(obj)
+            })
+                .then((res) => {
+                    if (res.status = 201){
+                        alert("Thay đổi trạng thái đơn hàng thành công");
+                        navigation.navigate('OderStatusSale')
+                    }
+                        
+                })
+                .catch((ex) => {
+                    console.log(ex);
+                });
+        }
 
         return (
             <View>
@@ -132,18 +169,24 @@ const OderStatus = ({route, navigation }) => {
                 </Modal>
             </View>
 
-            <TouchableOpacity style={{marginHorizontal:20}} onPress={HienModalBill}>
-                <Text style={{ fontSize:16}} >Date: {item.date}</Text>
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={{fontSize:16}}>Total Price: </Text>
-                    <Text style={{color:"#FF6633", fontSize:16}}>{item.total_price} đ</Text>
+            <TouchableOpacity style={{marginHorizontal:20, flexDirection: 'row'}} onPress={HienModalBill}>
+                <View style={{width:230}}>
+                    <Text style={{ fontSize:16}} >Date: {item.date}</Text>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{fontSize:16}}>Total Price: </Text>
+                        <Text style={{color:"#FF6633", fontSize:16}}>{item.total_price} đ</Text>
+                    </View>
                 </View>
+                 <TouchableOpacity onPress={UpdateBill} style={{paddingHorizontal:10, paddingVertical:8, marginLeft:"auto", borderColor: "#000", borderRadius:10, borderWidth:1}}>
+                    <Text>Done</Text>
+                 </TouchableOpacity>
                 
             </TouchableOpacity>
             <View style={styles.separator}/>
         </View>
         );
       };
+
 
     const getData = () =>{
         let url_bill = 'http://192.168.100.9:3000/api/bill';
@@ -154,11 +197,11 @@ const OderStatus = ({route, navigation }) => {
                })
                .then( (data) =>{
 
-                const bills = []
+                const bills = [];
+                console.log(data);
 
                 data.forEach(i => {
-                    if( (i.id_user == idU) &&
-                        (i.status.toLowerCase() == status.toLowerCase())){
+                    if(i.status.toLowerCase() == status.toLowerCase()){
                         
                         bills.push(i)
                     }
@@ -181,7 +224,6 @@ const OderStatus = ({route, navigation }) => {
                })
       }
 
-      
 
       React.useEffect (() =>{
         getData(), getDataDetailed_bill();
@@ -220,25 +262,22 @@ const OderStatus = ({route, navigation }) => {
 
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
-                    <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('HomeSale')}}>
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946488.png"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('Search')}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3126/3126554.png"}}/>
+                    <TouchableOpacity style={{marginLeft: 80}} onPress={()=>{props.navigation.navigate('OderStatusSale')}}>
+                        <Image style={{width:27, height:27}} source={{uri:"https://cdn-icons-png.flaticon.com/128/665/665916.png"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('Feedback')}}>
-                        <Image style={{width:27, height:27}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2567/2567557.png"}}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('User')}}>
+                    <TouchableOpacity style={{marginLeft: 80}} onPress={()=>{props.navigation.navigate('ProfileSale')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1144/1144760.png"}}/>
-                    </TouchableOpacity>       
+                    </TouchableOpacity>    
                     
                 </View>
         </View>
     );
 }
 
-export default OderStatus
+export default OderSale
 
 const styles = StyleSheet.create({
     container: {

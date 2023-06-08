@@ -50,16 +50,23 @@ const Login = (props) => {
                        let objU = res_login[0];
 
                        if (objU.password == password) {
-                           // đúng pass thì lưu vào storage
-    
-    
-                           try {
-                              await AsyncStorage.setItem("login", JSON.stringify(objU) );
-                               props.navigation.navigate('Home');    
-                             } catch (e) {
-                               // saving error
-                               console.log(e);
-                             }
+                            if (objU.role.toLowerCase() == "sale") {
+                                try {
+                                    await AsyncStorage.setItem("loginsale", JSON.stringify(objU) );
+                                     props.navigation.navigate('HomeSale');    
+                                   } catch (e) {
+                  
+                                     console.log(e);
+                                   }
+                            } else {
+                                try {
+                                    await AsyncStorage.setItem("login", JSON.stringify(objU) );
+                                     props.navigation.navigate('Home');    
+                                   } catch (e) {
+                              
+                                     console.log(e);
+                                   }
+                            }
                           
                        }else{
                            alert("Sai password");

@@ -4,39 +4,13 @@ import { RefreshControl, FlatList, Modal, Button, SafeAreaView, StyleSheet, Text
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import filter from 'lodash.filter';
 
-const Notification = ({navigation}) => {
-
-    const [objU, setobjU] = useState({});
-
-    const getInfo = async ()=>{
-      try {
-          const value = await AsyncStorage.getItem('login')
-          console.log("lấy dữ liệu " + value);
-          if(value !== null) {
-  
-              setobjU ( JSON.parse(value) );
-              
-          }
-        } catch(e) {
-          console.log(e);
-        }
-        
-    }
-
-    React.useEffect (() =>{
-        getInfo();
-      }, [])
+const OderStatusSale = (props) => {
 
     return (
         <View style={styles.container}>
             <View style={styles.herder}>
-                    <TouchableOpacity style={{marginRight: "auto"}}  onPress={()=>{navigation.goBack()}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3114/3114883.png"}}/>
-                    </TouchableOpacity>
-
-                    <Text style={{fontSize:20, marginRight:"auto"}}>Notification</Text>
-                    
-                </View>
+                <Text style={{fontSize:20}}>Oder Status</Text>  
+            </View>
                 <View style={styles.separator1}/>
 
 
@@ -53,7 +27,7 @@ const Notification = ({navigation}) => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{navigation.navigate('OrderStatus',{status: 'Chờ xác nhận', idU: objU._id})}}>
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{props.navigation.navigate('OrderSale',{status: 'Chờ xác nhận'})}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2169/2169864.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Chờ xác nhận</Text>
@@ -63,7 +37,7 @@ const Notification = ({navigation}) => {
 
                             <View style={styles.separator}/>
 
-                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{navigation.navigate('OrderStatus',{status: 'Chờ lấy hàng', idU: objU._id})}}>
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{props.navigation.navigate('OrderSale',{status: 'Chờ lấy hàng'})}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2630/2630085.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Chờ lấy hàng</Text>
@@ -74,10 +48,21 @@ const Notification = ({navigation}) => {
 
                             <View style={styles.separator}/>
 
-                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{navigation.navigate('OrderStatus',{status: 'Đang giao', idU: objU._id})}}>
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{props.navigation.navigate('OrderSale',{status: 'Đang giao'})}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/709/709790.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Đang giao</Text>
+                                </View>
+                                <Image style={{width:20, height:20, marginLeft: "auto"}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
+
+                            </TouchableOpacity >
+
+                            <View style={styles.separator}/>
+
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>{props.navigation.navigate('OrderSale',{status: 'Đã hoàn thành'})}}>
+                                <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2961/2961948.png"}}/>
+                                <View style={{marginLeft:40}}>
+                                    <Text style={{fontSize: 20}}>Đã hoàn thành</Text>
                                 </View>
                                 <Image style={{width:20, height:20, marginLeft: "auto"}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2889/2889731.png"}}/>
 
@@ -93,16 +78,13 @@ const Notification = ({navigation}) => {
 
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
-                    <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('HomeSale')}}>
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946488.png"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('Search')}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3126/3126554.png"}}/>
+                    <TouchableOpacity style={{marginLeft: 80}} onPress={()=>{props.navigation.navigate('OderStatusSale')}}>
+                        <Image style={{width:27, height:27}} source={{uri:"https://cdn-icons-png.flaticon.com/128/665/665916.png"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('Feedback')}}>
-                        <Image style={{width:27, height:27}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2567/2567557.png"}}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('User')}}>
+                    <TouchableOpacity style={{marginLeft: 80}} onPress={()=>{props.navigation.navigate('ProfileSale')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1144/1144760.png"}}/>
                     </TouchableOpacity>       
                     
@@ -111,7 +93,7 @@ const Notification = ({navigation}) => {
     );
 }
 
-export default Notification
+export default OderStatusSale
 
 const styles = StyleSheet.create({
     container: {
@@ -120,10 +102,10 @@ const styles = StyleSheet.create({
     },
     herder: {
         height: 70,
+        display: 'flex', 
         flexDirection: 'row',
         alignItems: "center",
-        justifyContent: 'space-between',
-        paddingHorizontal: 20
+        alignSelf: "center"
     },
     separator1: {
         height: 1,

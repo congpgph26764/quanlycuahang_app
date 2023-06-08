@@ -4,8 +4,9 @@ import { RefreshControl, FlatList, Modal, Button, SafeAreaView, StyleSheet, Text
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import filter from 'lodash.filter';
 
-const History = ({ navigation }) => {
+const History = ({route, navigation }) => {
 
+    const {idU} = route.params;
     const [bill, setbill] = useState([]);
     const [detailed_bill, setdetailed_bill] = useState([]);
 
@@ -157,7 +158,9 @@ const History = ({ navigation }) => {
                 console.log(data);
 
                 data.forEach(i => {
-                    if(i.status == "Đã hoàn thành"){
+                    if( (i.id_user == idU) &&
+                        (i.status == "Đã hoàn thành")){
+                        
                         bills.push(i)
                     }
                 });
@@ -203,7 +206,7 @@ const History = ({ navigation }) => {
                     <View style={{marginHorizontal: 20}}>
                         <SafeAreaView style={{marginTop:40,}}>
                             <FlatList
-                                data={bill}
+                                data={bill.sort((a, b) => b.idBill - a.idBill)}
                                 keyExtractor={item => item._id}
                                 renderItem={renderItem}
                             />        

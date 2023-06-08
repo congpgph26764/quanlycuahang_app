@@ -213,9 +213,10 @@ const Cart = (props) => {
       alert("Chức năng đang được update!\n Vui lòng chọn chức năng thanh toán khác")
       return;
     } 
+    console.log(objU);
 
 
-    let objBill = { idBill: idBill, name: name, email: email, phone: phone, address: address, date: date, total_price: total_price, payment_methods: selectedValue, status: status, note: note };
+    let objBill = { idBill: idBill, name: name, email: email, phone: phone, address: address, date: date, total_price: total_price, payment_methods: selectedValue, status: status, note: note, id_user: objU._id };
 
     let url_bill = 'http://192.168.100.9:3000/api/bill/add';
     
@@ -265,8 +266,25 @@ const Cart = (props) => {
        })
     }
 
+    const [objU, setobjU] = useState({});
+
+    const getInfo = async ()=>{
+      try {
+          const value = await AsyncStorage.getItem('login')
+          console.log("lấy dữ liệu " + value);
+          if(value !== null) {
+  
+              setobjU ( JSON.parse(value) );
+              
+          }
+        } catch(e) {
+          console.log(e);
+        }
+        
+    }
+
     React.useEffect(() => {
-      getDataBill();
+      getDataBill(),getInfo();
     }, []);
 
 
