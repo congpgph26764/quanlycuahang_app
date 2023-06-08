@@ -4,9 +4,8 @@ import { RefreshControl, FlatList, Modal, Button, SafeAreaView, StyleSheet, Text
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import filter from 'lodash.filter';
 
-const OderStatus = ({route, navigation }) => {
+const History = ({ navigation }) => {
 
-    const {status} = route.params;
     const [bill, setbill] = useState([]);
     const [detailed_bill, setdetailed_bill] = useState([]);
 
@@ -155,13 +154,14 @@ const OderStatus = ({route, navigation }) => {
                .then( (data) =>{
 
                 const bills = [];
+                console.log(data);
 
                 data.forEach(i => {
-                    if(i.status.toLowerCase() == status.toLowerCase()){
-                        
+                    if(i.status == "Đã hoàn thành"){
                         bills.push(i)
                     }
                 });
+                console.log(bills);
                 setbill(bills)
                 
                  
@@ -180,7 +180,6 @@ const OderStatus = ({route, navigation }) => {
                })
       }
 
-
       React.useEffect (() =>{
         getData(), getDataDetailed_bill();
       }, [])
@@ -194,7 +193,7 @@ const OderStatus = ({route, navigation }) => {
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3114/3114883.png"}}/>
                     </TouchableOpacity>
 
-                    <Text style={{fontSize:20, marginRight:"auto"}}>{status}</Text>
+                    <Text style={{fontSize:20, marginRight:"auto"}}>Purchase List</Text>
                     
                 </View>
                 <View style={styles.separator1}/>
@@ -219,7 +218,7 @@ const OderStatus = ({route, navigation }) => {
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
                     <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946488.png"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('Search')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3126/3126554.png"}}/>
@@ -228,15 +227,15 @@ const OderStatus = ({route, navigation }) => {
                         <Image style={{width:27, height:27}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2567/2567557.png"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{navigation.navigate('User')}}>
-                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1144/1144760.png"}}/>
-                    </TouchableOpacity>       
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/64/64572.png"}}/>
+                    </TouchableOpacity>     
                     
                 </View>
         </View>
     );
 }
 
-export default OderStatus
+export default History
 
 const styles = StyleSheet.create({
     container: {

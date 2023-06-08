@@ -9,6 +9,8 @@ import Cart from '../screens/Cart';
 import Info from '../screens/Info';
 import Notification from '../screens/Notification';
 import OrderStatus from '../screens/OrderStatus';
+import History from '../screens/History';
+import Password from '../screens/Password';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -29,6 +31,8 @@ const MainNavigator = () => {
             <StackDemo.Screen name='Info' component={Info} options={{headerShown: false}}/>
             <StackDemo.Screen name='Notification' component={Notification} options={{headerShown: false}}/>
             <StackDemo.Screen name='OrderStatus' component={OrderStatus} options={{headerShown: false}}/>
+            <StackDemo.Screen name='History' component={History} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Password' component={Password} options={{headerShown: false}}/>
         </StackDemo.Navigator>
       </NavigationContainer>
     );

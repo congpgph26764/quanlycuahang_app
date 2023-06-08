@@ -58,7 +58,7 @@ const User = (props) => {
 
                             <View style={styles.separator1}/>
 
-                            <TouchableOpacity style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
+                            <TouchableOpacity onPress={()=>{props.navigation.navigate('Password')}} style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2438/2438078.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Password</Text>
@@ -80,7 +80,7 @@ const User = (props) => {
 
                             <View style={styles.separator1}/>
 
-                            <TouchableOpacity style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
+                            <TouchableOpacity onPress={()=>{props.navigation.navigate('History')}} style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2961/2961948.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Purchase List</Text>
