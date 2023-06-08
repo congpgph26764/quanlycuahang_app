@@ -191,15 +191,14 @@ const containsCat = ({id_category}, query) =>{
   };
 
   const renderItemNew = ({item}) => {
-    if (pro.status == "new") {
-      
-    }
+    if (item.status.toLowerCase() == "new") {
 
-    return (
-      <ItemNew
-        item={item}
-      />
-    );
+      return (
+        <ItemNew
+          item={item}
+        />
+      );
+    }
   };
 
   const renderItemPo = ({item}) => {
@@ -302,7 +301,7 @@ const containsCat = ({id_category}, query) =>{
                     <TouchableOpacity style={{ marginLeft: "auto"}}  onPress={()=>{props.navigation.navigate('Cart')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2832/2832495.png"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginLeft: 30}} onPress={()=>{props.navigation.navigate('Home')}}>
+                    <TouchableOpacity style={{ marginLeft: 30}} onPress={()=>{props.navigation.navigate('Notification')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2529/2529521.png"}}/>
                     </TouchableOpacity>
                     
@@ -377,7 +376,7 @@ const containsCat = ({id_category}, query) =>{
                 <View style={styles.separator1}/>
                 <View style={styles.footer}>
                     <TouchableOpacity>
-                        <Image style={{width:25, height:25}} onPress={()=>{props.navigation.navigate('Search')}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946436.png"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 70}} onPress={()=>{props.navigation.navigate('Search')}}>
                         <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3126/3126554.png"}}/>
