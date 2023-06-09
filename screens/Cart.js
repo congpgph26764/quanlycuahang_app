@@ -218,7 +218,7 @@ const Cart = (props) => {
 
     let objBill = { idBill: idBill, name: name, email: email, phone: phone, address: address, date: date, total_price: total_price, payment_methods: selectedValue, status: status, note: note, id_user: objU._id };
 
-    let url_bill = 'http://192.168.11.72:3000/api/bill/add';
+    let url_bill = 'http://192.168.100.9:3000/api/bill/add';
     
     fetch(url_bill, {
         method: 'POST',
@@ -247,7 +247,7 @@ const Cart = (props) => {
     }
 
     const getDataBill = () =>{
-      let url_bill = 'http://192.168.11.72:3000/api/bill';
+      let url_bill = 'http://192.168.100.9:3000/api/bill';
     
        fetch(url_bill)
              .then((res) => {
@@ -293,7 +293,7 @@ const Cart = (props) => {
       cartData.forEach(pro => {
         let data = {name: pro.name, price: pro.price, id_bill: idBill, quantity: pro.quantityItem}
       
-      let url_bill = 'http://192.168.11.72:3000/api/detailed_bill/add';
+      let url_bill = 'http://192.168.100.9:3000/api/detailed_bill/add';
     
       fetch(url_bill, {
           method: 'POST',

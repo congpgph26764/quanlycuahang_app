@@ -57,7 +57,7 @@ const Password = ({navigation}) => {
                                     
         let obj = { _id: objU._id, name: objU.name, role: objU.role, email: objU.email, phone: objU.phone, password: newPass, address: objU.address};
 
-        let url_user ="http://192.168.11.72:3000/api/users/update/"+objU._id;
+        let url_user ="http://192.168.100.9:3000/api/users/update/"+objU._id;
 
         fetch(url_user, {
         method: "PUT",

@@ -6,11 +6,12 @@ import {Linking} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 const Detail = ({route, navigation }) => {
+
     
     
     return(
         <View style={styles.container}>
-        
+            
         </View>
     );
 }
