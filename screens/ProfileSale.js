@@ -6,11 +6,74 @@ import filter from 'lodash.filter';
 
 const ProfileSale = (props) => {
 
+    const [objSale, setobjSale] = useState({});
     
+    const getInfo = async ()=>{
+        try {
+            const value = await AsyncStorage.getItem('loginsale')
+            console.log("lấy dữ liệu " + value);
+            if(value !== null) {
+    
+                setobjSale ( JSON.parse(value) );
+                
+            }
+          } catch(e) {
+            console.log(e);
+          }
+          
+      }
+
+      React.useEffect(() => {
+            getInfo();
+        }, []);
 
     return (
         <View style={styles.container}>
-            
+            <View style={styles.herder}>
+                <Text style={{fontSize:20}}>Profile</Text>  
+            </View>
+                <View style={styles.separator1}/>
+
+
+                <View style={styles.contentContainer}> 
+                    <ScrollView >
+                        <View style={{marginTop: 30, flex: 1, alignItems: 'center', justifyContent: 'center',}}>
+                    
+                            <Image
+                                source={{ uri: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383' }}
+                                style={styles.profileImage}
+                            />
+                            <Text style={styles.name}>{objSale.name}</Text>
+                            <Text style={styles.bio}>Email: {objSale.email}</Text>
+                            <Text style={styles.location}>Phone: {objSale.phone}</Text>
+                            <Text style={styles.location}>Address: {objSale.address}</Text>
+
+                            <View style={{height:30}}></View>
+
+                            <TouchableOpacity style={{marginTop: 20,}} onPress={()=>{props.navigation.navigate('Login')}}>
+                                <Text style={{ color: "red", alignSelf: "center"}}>LOG OUT</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </ScrollView>
+
+                </View>
+                    
+                            
+
+                <View style={styles.separator1}/>
+                <View style={styles.footer}>
+                <TouchableOpacity onPress={()=>{props.navigation.navigate('HomeSale')}}>
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/1946/1946488.png"}}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{marginLeft: 80}} onPress={()=>{props.navigation.navigate('OderStatusSale')}}>
+                        <Image style={{width:27, height:27}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2567/2567557.png"}}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{marginLeft: 80}} onPress={()=>{props.navigation.navigate('ProfileSale')}}>
+                        <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/512/64/64572.png"}}/>
+                    </TouchableOpacity>       
+                    
+                </View>
         </View>
     );
 }

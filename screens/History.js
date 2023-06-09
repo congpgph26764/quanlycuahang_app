@@ -146,7 +146,7 @@ const History = ({route, navigation }) => {
       };
 
     const getData = () =>{
-        let url_bill = 'http://192.168.100.9:3000/api/bill';
+        let url_bill = 'http://192.168.11.72:3000/api/bill';
       
          fetch(url_bill)
                .then((res) => {
@@ -173,7 +173,7 @@ const History = ({route, navigation }) => {
       }
 
       const getDataDetailed_bill = () =>{
-        let url_bill = 'http://192.168.100.9:3000/api/detailed_bill';
+        let url_bill = 'http://192.168.11.72:3000/api/detailed_bill';
       
          fetch(url_bill)
                .then((res) => {
