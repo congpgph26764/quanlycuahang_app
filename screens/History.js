@@ -6,6 +6,8 @@ import filter from 'lodash.filter';
 
 const History = ({route, navigation }) => {
 
+    const ip = "192.168.100.9";
+
     const {idU} = route.params;
     const [bill, setbill] = useState([]);
     const [detailed_bill, setdetailed_bill] = useState([]);
@@ -146,7 +148,7 @@ const History = ({route, navigation }) => {
       };
 
     const getData = () =>{
-        let url_bill = 'http://192.168.100.9:3000/api/bill';
+        let url_bill = 'http://'+ip+':3000/api/bill';
       
          fetch(url_bill)
                .then((res) => {
@@ -173,7 +175,7 @@ const History = ({route, navigation }) => {
       }
 
       const getDataDetailed_bill = () =>{
-        let url_bill = 'http://192.168.100.9:3000/api/detailed_bill';
+        let url_bill = 'http://'+ip+':3000/api/detailed_bill';
       
          fetch(url_bill)
                .then((res) => {

@@ -4,6 +4,8 @@ import {Button, StyleSheet, Text, View, TextInput, ScrollView } from 'react-nati
 
 const Signup = (props) => {
 
+    const ip = "192.168.100.9";
+
     const [fullname, setfullname] = useState("");
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
@@ -13,7 +15,7 @@ const Signup = (props) => {
     const [acc, setAcc] = useState([]);
 
     const getData = () =>{
-        let url_cat = 'http://192.168.100.9:3000/api/users';
+        let url_cat = 'http://'+ip+':3000/api/users';
       
          fetch(url_cat)
                .then((res) => {
@@ -69,7 +71,7 @@ const Signup = (props) => {
 
         let objU = { name: fullname, role: "User", email: email, phone: phone, password: password, address: address };
 
-        let url_users = 'http://192.168.100.9:3000/api/users/add';
+        let url_users = 'http://'+ip+':3000/api/users/add';
         
         fetch(url_users, {
             method: 'POST',

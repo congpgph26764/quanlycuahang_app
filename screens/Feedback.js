@@ -7,6 +7,8 @@ import * as FileSystem from 'expo-file-system';
 
 const Feedback = (props) => {
 
+    const ip = "192.168.100.9";
+
     const [fullname, setfullname] = useState("");
     const [email, setemail] = useState("");
     const [phone, setphone] = useState("");
@@ -76,7 +78,7 @@ const Feedback = (props) => {
 
         let obj = { fullname: fullname, email: email, phone: phone, comment: comment, image: img_base64 };
 
-        let url_feed = 'http://192.168.100.9:3000/api/feedback/add';
+        let url_feed = 'http://'+ip+':3000/api/feedback/add';
         
         fetch(url_feed, {
             method: 'POST',

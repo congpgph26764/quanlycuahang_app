@@ -6,6 +6,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const User = ({navigation}) => {
 
+    const ip = "192.168.100.9";
+
     const [objU, setobjU] = useState({});
 
     const [name, setname] = useState("");
@@ -47,7 +49,7 @@ const User = ({navigation}) => {
                                     
             let obj = { _id: objU._id, name: name, role: objU.role, email: objU.email, phone: phone, password: objU.password, address: address};
     
-            let url_user ="http://192.168.100.9:3000/api/users/update/"+objU._id;
+            let url_user ='http://'+ip+':3000/api/users/update/'+objU._id;
     
             fetch(url_user, {
             method: "PUT",

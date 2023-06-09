@@ -5,6 +5,8 @@ import filter from 'lodash.filter';
 
 const Search = (props) => {
 
+    const ip = "192.168.100.9";
+
     const [selectedId, setSelectedId] = useState();
     const [cat, setcat] = useState([])
     const [pro, setpro] = useState([])
@@ -106,7 +108,7 @@ const Search = (props) => {
       };
 
       const getDataPro = () =>{
-        let url_pro = 'http://192.168.100.9:3000/api/products';
+        let url_pro = 'http://'+ip+':3000/api/products';
       
          fetch(url_pro)
                .then((res) => {
@@ -120,7 +122,7 @@ const Search = (props) => {
       }
 
       const getDataCat = () =>{
-        let url_cat = 'http://192.168.100.9:3000/api/categories';
+        let url_cat = 'http://'+ip+':3000/api/categories';
       
          fetch(url_cat)
                .then((res) => {

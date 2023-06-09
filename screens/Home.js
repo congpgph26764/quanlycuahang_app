@@ -71,6 +71,8 @@ const Home = (
     ItemElement = Itema,}
     ) => {
 
+      const ip = "192.168.100.9";
+
     const [selectedId, setSelectedId] = useState();
   const [selectedIndex, setselectedIndex] = useState(0);
   const scrollView = useRef();
@@ -242,7 +244,7 @@ const containsCat = ({id_category}, query) =>{
 
 
   const getDataPro = () =>{
-    let url_pro = 'http://192.168.100.9:3000/api/products';
+    let url_pro = 'http://'+ip+':3000/api/products';
   
      fetch(url_pro)
            .then((res) => {
@@ -266,7 +268,7 @@ const containsCat = ({id_category}, query) =>{
   }
 
   const getDataCat = () =>{
-    let url_cat = 'http://192.168.100.9:3000/api/categories';
+    let url_cat = 'http://'+ip+':3000/api/categories';
   
      fetch(url_cat)
            .then((res) => {

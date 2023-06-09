@@ -6,6 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = (props) => {
+
+    const ip = "192.168.100.9";
+
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [manhinhcho, setmanhinhcho] = useState (false);
@@ -34,7 +37,7 @@ const Login = (props) => {
             }
     
             // url_check_login
-           let url_check_login = 'http://192.168.100.9:3000/api/users?keyword='+email;
+           let url_check_login = 'http://'+ip+':3000/api/users?keyword='+email;
     
     
            fetch(url_check_login)

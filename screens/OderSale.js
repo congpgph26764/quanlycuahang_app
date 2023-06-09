@@ -6,6 +6,8 @@ import filter from 'lodash.filter';
 
 const OderSale = ({route, navigation }) => {
 
+    const ip = "192.168.100.9";
+
     const {status} = route.params;
     const [bill, setbill] = useState([]);
     const [detailed_bill, setdetailed_bill] = useState([]);
@@ -59,7 +61,7 @@ const OderSale = ({route, navigation }) => {
             let obj = { _id: item._id, idBill: item.idBill, name: item.name, email: item.email, phone: item.phone, address: item.address,
                 date: item.date, total_price: item.total_price, payment_methods: item.payment_methods, note: item.note, id_user: item.id_user, status: statusNew};
         
-                let url_bill ="http://192.168.100.9:3000/api/bill/update/"+ item._id;
+                let url_bill ='http://'+ip+':3000/api/bill/update/'+ item._id;
         
                 fetch(url_bill, {
                 method: "PUT",
@@ -189,7 +191,7 @@ const OderSale = ({route, navigation }) => {
 
 
     const getData = () =>{
-        let url_bill = 'http://192.168.100.9:3000/api/bill';
+        let url_bill = 'http://'+ip+':3000/api/bill';
       
          fetch(url_bill)
                .then((res) => {
@@ -213,7 +215,7 @@ const OderSale = ({route, navigation }) => {
       }
 
       const getDataDetailed_bill = () =>{
-        let url_bill = 'http://192.168.100.9:3000/api/detailed_bill';
+        let url_bill = 'http://'+ip+':3000/api/detailed_bill';
       
          fetch(url_bill)
                .then((res) => {
