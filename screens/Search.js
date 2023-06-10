@@ -252,6 +252,7 @@ const styles = StyleSheet.create({
         height: 260,
         backgroundColor: "#ffff",
         marginHorizontal: 10,
+        marginVertical: 10,
       },
       titlepro: {
         marginHorizontal: 10,

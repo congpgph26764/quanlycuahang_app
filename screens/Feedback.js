@@ -76,7 +76,7 @@ const Feedback = (props) => {
 
 
 
-        let obj = { fullname: fullname, email: email, phone: phone, comment: comment, image: img_base64 };
+        let obj = { name: fullname, phone: phone, email: email, comment: comment, image: img_base64 };
 
         let url_feed = 'http://'+ip+':3000/api/feedback/add';
         
