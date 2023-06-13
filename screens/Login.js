@@ -61,7 +61,7 @@ const Login = (props) => {
                   
                                      console.log(e);
                                    }
-                            } else {
+                            } else if (objU.role.toLowerCase() == "user") {
                                 try {
                                     await AsyncStorage.setItem("login", JSON.stringify(objU) );
                                      props.navigation.navigate('Home');    

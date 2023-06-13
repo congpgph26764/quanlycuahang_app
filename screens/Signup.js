@@ -102,7 +102,7 @@ const Signup = (props) => {
 
         return (
             <View style={styles.container}>
-                <ScrollView>
+                <ScrollView style={{paddingHorizontal:20}}>
                 <Text style={{fontSize: 48, lineHeight: 72, marginTop: 30, color:'#1877F2'}}>Hello!</Text>
                 <Text style={{fontSize: 20,width:200, lineHeight: 30, color:"#4E4B66"}}>Signup to get Started</Text>
         
@@ -151,8 +151,4 @@ const Signup = (props) => {
 export default Signup
 
 const styles = StyleSheet.create({
-  container: {
-    marginLeft: 25,
-    marginRight: 25,
-  },
 });
