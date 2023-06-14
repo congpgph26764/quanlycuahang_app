@@ -125,7 +125,7 @@ const User = ({navigation}) => {
                                     <View style={{display: 'flex', flexDirection: 'row', marginTop: 16, fontSize:14}}>
                                         <Text >Phone Number</Text>
                                     </View>
-                                    <TextInput onChangeText={(txt)=>{setphone(txt)}} placeholder='Phone Number' style={{marginTop:10, padding:10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
+                                    <TextInput keyboardType="numeric" onChangeText={(txt)=>{setphone(txt)}} placeholder='Phone Number' style={{marginTop:10, padding:10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6}}></TextInput>
                             
                                     <View style={{display: 'flex', flexDirection: 'row', marginTop: 16, fontSize:14}}>
                                         <Text >Address</Text>

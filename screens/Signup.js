@@ -134,7 +134,7 @@ const Signup = (props) => {
                     <Text >Phone Number</Text>
                     <Text style={{color:"red", marginLeft: 5}}>*</Text>
                 </View>
-                <TextInput style={{marginTop:10, padding:10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6, marginBottom: 48}} onChangeText={(txt)=>{setphone(txt)}}></TextInput>
+                <TextInput keyboardType="numeric" style={{marginTop:10, padding:10, height:48, borderColor: "#4E4B66", borderWidth: 1, borderRadius: 6, marginBottom: 48}} onChangeText={(txt)=>{setphone(txt)}}></TextInput>
         
         
                 <Button title='Creat Account' onPress={doSignup}></Button>

@@ -69,7 +69,7 @@ const User = (props) => {
 
                             <View style={styles.separator1}/>
 
-                            <TouchableOpacity style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
+                            <TouchableOpacity onPress={()=>{props.navigation.navigate('Payment')}} style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/4021/4021708.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Payment</Text>
@@ -80,7 +80,7 @@ const User = (props) => {
 
                             <View style={styles.separator1}/>
 
-                            <TouchableOpacity onPress={()=>{props.navigation.navigate('History',{idU: objU._id})}} style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
+                            <TouchableOpacity  onPress={()=>{props.navigation.navigate('History',{idU: objU._id})}} style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between',}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/2961/2961948.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Purchase List</Text>
@@ -91,7 +91,7 @@ const User = (props) => {
 
                             <View style={styles.separator1}/>
 
-                            <TouchableOpacity style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between'}}>
+                            <TouchableOpacity onPress={()=>{props.navigation.navigate('Contact')}} style={{ flexDirection: 'row', marginVertical:20 ,alignItems:"center", justifyContent: 'space-between'}}>
                                 <Image style={{width:25, height:25}} source={{uri:"https://cdn-icons-png.flaticon.com/128/3095/3095583.png"}}/>
                                 <View style={{marginLeft:40}}>
                                     <Text style={{fontSize: 20}}>Contact</Text>

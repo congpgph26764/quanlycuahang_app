@@ -16,6 +16,8 @@ import DetailSale from '../screens/DetailSale';
 import OderStatusSale from '../screens/OderStatusSale';
 import ProfileSale from '../screens/ProfileSale';
 import OderSale from '../screens/OderSale';
+import Contact from '../screens/Contact';
+import Payment from '../screens/Payment';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -43,6 +45,8 @@ const MainNavigator = () => {
             <StackDemo.Screen name='OderStatusSale' component={OderStatusSale} options={{headerShown: false}}/>
             <StackDemo.Screen name='ProfileSale' component={ProfileSale} options={{headerShown: false}}/>
             <StackDemo.Screen name='OrderSale' component={OderSale} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Contact' component={Contact} options={{headerShown: false}}/>
+            <StackDemo.Screen name='Payment' component={Payment} options={{headerShown: false}}/>
         </StackDemo.Navigator>
       </NavigationContainer>
     );

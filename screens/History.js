@@ -26,6 +26,10 @@ const History = ({route, navigation }) => {
     const [note, setnote] = useState("");
     const [statusBill, setstatusBill] = useState("");
 
+    const [numOders, setnumOders] = useState("");
+    const [totalAmo, settotalAmo] = useState("");
+
+
     const renderItem = ({item}) => {
         const toggleModal = () => {
             setshowModalDialog(!showModalDialog);
@@ -159,16 +163,22 @@ const History = ({route, navigation }) => {
                 const bills = [];
                 console.log(data);
                 console.log(idU);
+                let count = 0;
+                let total = 0;
 
                 data.forEach(i => {
                     if( (i.id_user == idU) &&
                         (i.status == "Đã hoàn thành")){
-                        
+                        count += 1;
+                        total += i.total_price;
                         bills.push(i)
+                        
                     }
                 });
                 console.log(bills);
-                setbill(bills)
+                setbill(bills);
+                setnumOders(count);
+                settotalAmo(total)
                 
                  
                })
@@ -206,8 +216,28 @@ const History = ({route, navigation }) => {
 
 
                 <View style={styles.contentContainer}> 
+
                     <View style={{marginHorizontal: 20}}>
-                        <SafeAreaView style={{marginTop:40,}}>
+                        <Text style={{marginTop:20, fontSize:20, marginBottom: 5}}>Statistical</Text>
+                        <View style={styles.separator1}/>
+                        <View style={{display: "flex", flexDirection: 'row', marginVertical: 10}}>
+                            <View style={{width:"50%", alignItems: "center"}}>
+                                <Text>Number of Orders</Text>
+                                <Text style={{color:"blue", fontSize:20, fontWeight: 'bold'}}>{numOders}</Text>
+                            </View>
+                            
+                            <View style={{width:"50%", alignItems: "center", borderStartWidth: 1,}}>
+                                <Text>The Total Amount</Text>
+                                <Text style={{color:"#FF6633", fontSize:20, fontWeight: 'bold'}}>{totalAmo} đ</Text>
+                            </View>
+                        </View>
+                        <View style={styles.separator1}/>
+                    </View>
+                    
+
+                    <View style={{marginHorizontal: 20,marginVertical: 20}}>
+                        <Text style={{fontSize:20}}>Purchase List</Text>
+                        <SafeAreaView style={{marginTop:10,}}>
                             <FlatList
                                 data={bill.sort((a, b) => b.idBill - a.idBill)}
                                 keyExtractor={item => item._id}
