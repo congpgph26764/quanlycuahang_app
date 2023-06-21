@@ -177,6 +177,7 @@ const Search = (props) => {
                             <Text style={{marginTop:20, fontSize:20}}>Categories</Text>
                             <SafeAreaView style={{marginTop:10, alignItems: "center"}}>
                                 <FlatList
+                                    style={{width: "100%"}}
                                     horizontal
                                     data={cat}
                                     keyExtractor={item => item._id}
