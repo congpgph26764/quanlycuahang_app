@@ -130,7 +130,7 @@ const containsCat = ({id_category}, query) =>{
       quantity: item.quantity,
       status: item.status
       })}}>
-        <Image style={{width:160, height:150}} source={{uri: item.image}}></Image>
+        <Image style={{width:160, height:150}} source={{uri: item.image}} ></Image>
         <View style={styles.titlenew}>
             <Text numberOfLines={2} >
                 {item.name.toUpperCase()}</Text>
@@ -139,8 +139,19 @@ const containsCat = ({id_category}, query) =>{
                 ? `${item.description}`
                 : `${item.description.substring(0, 200)}...`}
             </Text>
-            <TouchableOpacity style={{alignSelf: "center",marginTop:15, backgroundColor: "#8B4513", padding:5}}>
-                <Text style={{color:"#fff"}}>Add Cart</Text>
+            <TouchableOpacity style={{alignSelf: "center",marginTop:15, backgroundColor: "#8B4513", padding:5}} onPress={()=>{props.navigation.navigate('Detail', {
+                                id: item._id,
+                                name: item.name,
+                                description: item.description,
+                                id_category: item.id_category,
+                                price: item.price,
+                                image: item.image,
+                                image1: item.image1,
+                                image2: item.image2,
+                                quantity: item.quantity,
+                                status: item.status
+                                })}}>
+                <Text style={{color:"#fff"}}>Detail View</Text>
             </TouchableOpacity>
         </View>
       
