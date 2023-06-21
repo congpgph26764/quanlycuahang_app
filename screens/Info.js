@@ -95,7 +95,7 @@ const User = ({navigation}) => {
                         <View style={{marginTop: 30, flex: 1, alignItems: 'center', justifyContent: 'center',}}>
                     
                         <Image
-                            source={{ uri: 'https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383' }}
+                            source={{ uri: 'https://i.pinimg.com/236x/ec/45/1f/ec451f0141ffe09e995aa8461bcce071.jpg' }}
                             style={styles.profileImage}
                         />
                         <Text style={styles.name}>{objU.name}</Text>

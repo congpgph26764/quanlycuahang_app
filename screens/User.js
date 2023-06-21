@@ -43,7 +43,7 @@ const User = (props) => {
                     <ScrollView >
                         <View style={{marginHorizontal: 20}}>
                             <View style={{alignItems:"center", paddingTop: 20}}>
-                                <Image style={{width:120, height:120, borderRadius: 100}} source={{uri: "https://bizweb.dktcdn.net/100/414/728/products/5-1.jpg?v=1670559516383"}}></Image>
+                                <Image style={{width:120, height:120, borderRadius: 100}} source={{uri: "https://i.pinimg.com/236x/ec/45/1f/ec451f0141ffe09e995aa8461bcce071.jpg"}}></Image>
                                 <Text style= {{fontSize: 25, marginTop:10}}>{objU.name}</Text>
                             </View>
 
